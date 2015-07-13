@@ -1,3 +1,11 @@
+2015-07-14 -- 1.0.0
+
+- Forked project from SourceForce to GitHub
+- Updated `extconf.rb` to allow for use on modern OS
+- Renamed project and gem, as this will __only__ be focusing on Ruby
+
+---
+
 2010-03-19 -- 0.6.1
 
 - removed 32-bit only AE.run_application_event_loop, AE.quit_application_event_loop
