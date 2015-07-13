@@ -29,6 +29,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 require 'mkmf'
+require 'config'
 
 $CFLAGS << ' -Wall'
 $LDFLAGS << ' -framework Carbon -framework ApplicationServices'
