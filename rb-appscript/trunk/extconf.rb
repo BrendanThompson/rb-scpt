@@ -29,7 +29,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 require 'mkmf'
-require 'config'
+require 'rbconfig'
 
 $CFLAGS << ' -Wall'
 $LDFLAGS << ' -framework Carbon -framework ApplicationServices'
@@ -37,12 +37,12 @@ $LDFLAGS << ' -framework Carbon -framework ApplicationServices'
 # Avoid `ID' and `T_DATA' symbol collisions between Ruby and Carbon.
 # (adapted code from RubyAEOSA - FUJIMOTO Hisakuni  <hisa -at- fobj - com>)
 
-maj, min, rev = RUBY_VERSION.split('.')
-is_ruby_18 = (maj == '1' and min.to_i < 9)
+maj, min = RUBY_VERSION.split('.')
+is_ruby_18 = (maj <= '1' and min.to_i < 9)
 if is_ruby_18
-	header_path = Config::CONFIG['archdir']
+	header_path = RbConfig::CONFIG['archdir']
 else
-	header_path = File.join(Config::CONFIG['rubyhdrdir'], 'ruby')
+	header_path = File.join(RbConfig::CONFIG['rubyhdrdir'], 'ruby')
 end
 ruby_h = File.join(header_path, 'ruby.h')
 intern_h = File.join(header_path, 'intern.h')
