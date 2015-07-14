@@ -1,9 +1,9 @@
-#!/usr/bin/ruby -w
+#!/usr/local/bin/ruby -w
 
 begin; require 'rubygems'; rescue LoadError; end
 
 require 'test/unit'
-require 'appscript'
+require 'rb-scpt'
 
 # rb-appscript 0.5.0+ should no longer require the following kludge:
 #class AS_SafeObject

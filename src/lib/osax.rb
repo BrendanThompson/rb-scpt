@@ -4,7 +4,7 @@
 # osax -- invoke scripting addition (OSAX) commands from Ruby
 #
 
-require "appscript"
+require "rb-scpt"
 
 module OSAX
 
