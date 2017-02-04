@@ -1,10 +1,10 @@
 #!/usr/bin/ruby -w
 
-require 'test/unit'
+require 'minitest/autorun'
 require "_aem/mactypes"
 
 
-class TC_MacTypes < Test::Unit::TestCase
+class TC_MacTypes < Minitest::Test
 
   def setup
     @path1 = `mktemp -t codecs-test`.chomp
@@ -52,7 +52,7 @@ class TC_MacTypes < Test::Unit::TestCase
     assert_raises(MacTypes::FileNotFoundError) { f.to_file_url } # File not found.
 
     assert_equal(MacTypes::Alias.path("/Library/Scripts/"), MacTypes::Alias.path("/Library/Scripts/"))
-    assert_not_equal(MacTypes::Alias.path("/Library/Scripts/"), MacTypes::Alias.path("/Applications/"))
+    refute_equal(MacTypes::Alias.path("/Library/Scripts/"), MacTypes::Alias.path("/Applications/"))
   end
 
 
@@ -71,7 +71,7 @@ class TC_MacTypes < Test::Unit::TestCase
     assert_raises(MacTypes::FileNotFoundError) { g.to_alias } # File "/non/existent path" not found.
 
     assert_equal(MacTypes::FileURL.path("/Library/Scripts/"), MacTypes::FileURL.path("/Library/Scripts/"))
-    assert_not_equal(MacTypes::FileURL.path("/Library/Scripts/"), MacTypes::FileURL.path("/Applications/"))
-    assert_not_equal(MacTypes::FileURL.path("/Library/Scripts/"), MacTypes::Alias.path("/Library/Scripts/"))
+    refute_equal(MacTypes::FileURL.path("/Library/Scripts/"), MacTypes::FileURL.path("/Applications/"))
+    refute_equal(MacTypes::FileURL.path("/Library/Scripts/"), MacTypes::Alias.path("/Library/Scripts/"))
   end
 end

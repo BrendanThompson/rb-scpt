@@ -1,6 +1,6 @@
 #!/usr/local/bin/ruby -w
 
-require 'test/unit'
+require 'minitest/autorun'
 require 'rb-scpt'
 
 # rb-appscript 0.5.0+ should no longer require the following kludge:
@@ -9,7 +9,7 @@ require 'rb-scpt'
 #	end
 #end
 
-class TC_AppscriptNewApp < Test::Unit::TestCase
+class TC_AppscriptNewApp < Minitest::Test
 
   def test_by_name
     [
@@ -18,7 +18,7 @@ class TC_AppscriptNewApp < Test::Unit::TestCase
      'System Events'
     ].each do |name|
       a = Appscript.app(name)
-      assert_not_nil(a)
+      refute_nil(a)
       assert_instance_of(Appscript::Application, a)
       assert_instance_of(Appscript::Reference, a.name)
     end
@@ -35,7 +35,7 @@ class TC_AppscriptNewApp < Test::Unit::TestCase
      'com.apple.finder',
     ].each do |name|
       a = Appscript.app.by_id(name)
-      assert_not_nil(a)
+      refute_nil(a)
       assert_instance_of(Appscript::Application, a)
       assert_instance_of(Appscript::Reference, a.name)
     end
@@ -67,7 +67,7 @@ class TC_AppscriptNewApp < Test::Unit::TestCase
 end
 
 
-class TC_AppscriptCommands < Test::Unit::TestCase
+class TC_AppscriptCommands < Minitest::Test
 
   def setup
     @te = Appscript.app('TextEdit')
@@ -134,7 +134,7 @@ class TC_AppscriptCommands < Test::Unit::TestCase
     assert_equal(r, @f.items[f].get)
 
     assert_equal(@f.home.items.get, @f.home.items.get)
-    assert_not_equal(@f.disks['non-existent'], @f.disks[1].get)
+    refute_equal(@f.disks['non-existent'], @f.disks[1].get)
   end
 
   def test_command_error

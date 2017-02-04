@@ -1,6 +1,6 @@
 #!/usr/bin/ruby -w
 
-require 'test/unit'
+require 'minitest/autorun'
 require 'aem'
 require 'kae'
 require 'ae'
@@ -27,10 +27,7 @@ def ut16(s)
   end
 end
 
-
-
-
-class TC_Codecs < Test::Unit::TestCase
+class TC_Codecs < Minitest::Test
 
   def setup
     @c = AEM::Codecs.new
@@ -144,10 +141,10 @@ class TC_Codecs < Test::Unit::TestCase
       d = @c.pack(val)
       val2 = @c.unpack(d)
       assert_equal(val, val2)
-      assert_block { val.eql?(val2) }
+      assert_predicate val, :eql?, val2
       val2 = @c.unpack(d)
       assert_equal(val2, val)
-      assert_block { val2.eql?(val) }
+      assert_predicate val2, :eql?, val
     end
     assert_raises(ArgumentError) { AEM::AEType.new(3) }
     assert_raises(ArgumentError) { AEM::AEType.new("docum") }

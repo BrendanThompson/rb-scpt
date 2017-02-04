@@ -1,9 +1,9 @@
 #!/usr/bin/ruby -w
 
-require 'test/unit'
+require 'minitest/autorun'
 require "rb-scpt"
 
-class TC_AppscriptReferences < Test::Unit::TestCase
+class TC_AppscriptReferences < Minitest::Test
 
   def setup
     @te = Appscript.app('TextEdit')
@@ -96,7 +96,7 @@ class TC_AppscriptReferences < Test::Unit::TestCase
       val2 = @te.AS_app_data.unpack(d)
       if val.class == @te.AS_app_data.unpack(d).class # note: Appscript::Reference and Appscript::GenericReference currently aren't comparable with each other, so the next test would always fail for those
         assert_equal(val, val2)
-        assert_block { val.eql?(val2) }
+        assert_predicate val, :eql?, val2
       end
     end
   end
