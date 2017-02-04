@@ -54,7 +54,7 @@ module TerminologyParser
     end
 
     # Ruby 1.9 has changed the way that a character ordinal is obtained
-    maj, min, rev = RUBY_VERSION.split('.')
+    maj, min, _rev = RUBY_VERSION.split('.')
     if (maj == '1' and min.to_i < 9) # is Ruby 1.8
       def _length
         return @_str[@_ptr]
