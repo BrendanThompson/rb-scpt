@@ -11,21 +11,21 @@
 # Note: if using the appscript gem, rubygems must be required first:
 begin; require 'rubygems'; rescue LoadError; end
 
-require 'appscript'
-include Appscript
+  require 'appscript'
+  include Appscript
 
-people = app('Address Book').people
+  people = app('Address Book').people
 
-found_names = []
-people.name.get.zip(people.vcard.get).each do |name, vcard|
-	name = 'unknown' if name == ''
-	name = name.gsub('/', ':')
-	filename = "#{name}.vcard"
-	i = 1
-	while found_names.include?(filename.downcase)
-		filename = "#{name} #{i}.vcard"
-		i += 1
-	end
-	found_names.push(filename.downcase)
-	File.open(filename, 'w') { |f| f.puts vcard }
-end
+  found_names = []
+  people.name.get.zip(people.vcard.get).each do |name, vcard|
+    name = 'unknown' if name == ''
+    name = name.gsub('/', ':')
+    filename = "#{name}.vcard"
+    i = 1
+    while found_names.include?(filename.downcase)
+      filename = "#{name} #{i}.vcard"
+      i += 1
+    end
+    found_names.push(filename.downcase)
+    File.open(filename, 'w') { |f| f.puts vcard }
+  end

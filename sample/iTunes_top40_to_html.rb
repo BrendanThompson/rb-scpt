@@ -8,14 +8,14 @@
 # Note: if using the appscript gem, rubygems must be required first:
 begin; require 'rubygems'; rescue LoadError; end
 
-require 'appscript'
-include Appscript
-require 'osax'
-require "amrita/template"
-include Amrita
+  require 'appscript'
+  include Appscript
+  require 'osax'
+  require "amrita/template"
+  include Amrita
 
-# Amrita HTML template
-tmpl = TemplateText.new <<END
+  # Amrita HTML template
+  tmpl = TemplateText.new <<END
 <html>
 <head>
 <title> iTunes Top 40 Tracks</title>
@@ -41,31 +41,29 @@ tmpl = TemplateText.new <<END
 </html>
 END
 
-# Choose the file to write
-sa = OSAX.osax('StandardAdditions')
-out_file = sa.choose_file_name(:default_name=>'My-iTunes-Top-40.html')
+  # Choose the file to write
+  sa = OSAX.osax('StandardAdditions')
+  out_file = sa.choose_file_name(:default_name=>'My-iTunes-Top-40.html')
 
-# Get the played count, name and album for every track in iTunes
-tracks = app('iTunes').library_playlists[1].tracks
-info = tracks.played_count.get.zip(tracks.name.get, tracks.album.get)
-# Extract the top 40 most played entries
-top40 = info.sort.reverse[0, 40]
+  # Get the played count, name and album for every track in iTunes
+  tracks = app('iTunes').library_playlists[1].tracks
+  info = tracks.played_count.get.zip(tracks.name.get, tracks.album.get)
+  # Extract the top 40 most played entries
+  top40 = info.sort.reverse[0, 40]
 
-# Assemble input data for Amrita
-data = {
-	:table_row=>top40.collect { |row_data| {:table_column=>row_data} }
-}
+  # Assemble input data for Amrita
+  data = {
+          :table_row=>top40.collect { |row_data| {:table_column=>row_data} }
+         }
 
-# Render HTML file
-tmpl.prettyprint = true
-File.open(out_file.to_s, 'w') { |f| tmpl.expand(f, data) }
+  # Render HTML file
+  tmpl.prettyprint = true
+  File.open(out_file.to_s, 'w') { |f| tmpl.expand(f, data) }
 
-# Open file in Safari for viewing
-# safari = app('Safari')
-# safari.activate
-# safari.open(out_file)
+  # Open file in Safari for viewing
+  # safari = app('Safari')
+  # safari.activate
+  # safari.open(out_file)
 
-# Open file in default web browser for viewing
-sa.open_location(out_file.url)
-
-
+  # Open file in default web browser for viewing
+  sa.open_location(out_file.url)

@@ -5,12 +5,12 @@
 # Note: if using the appscript gem, rubygems must be required first:
 begin; require 'rubygems'; rescue LoadError; end
 
-require "appscript"
-include Appscript
+  require "appscript"
+  include Appscript
 
-def print_folder_tree(folder, indent='')
+  def print_folder_tree(folder, indent='')
     puts indent + folder.name.get
     folder.folders.get.each { |folder| print_folder_tree(folder, indent + "\t") }
-end
+  end
 
-print_folder_tree(app('Finder').home.folders['Documents'])
+  print_folder_tree(app('Finder').home.folders['Documents'])

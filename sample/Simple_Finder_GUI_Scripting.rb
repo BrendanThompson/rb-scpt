@@ -8,11 +8,11 @@
 # Note: if using the appscript gem, rubygems must be required first:
 begin; require 'rubygems'; rescue LoadError; end
 
-require 'appscript'
-include Appscript
+  require 'appscript'
+  include Appscript
 
-se = app('System Events')
+  se = app('System Events')
 
-app('Finder').activate
-se.keystroke('n', :using=>[:command_down, :option_down])
-se.keystroke('ruby')
+  app('Finder').activate
+  se.keystroke('n', :using=>[:command_down, :option_down])
+  se.keystroke('ruby')
