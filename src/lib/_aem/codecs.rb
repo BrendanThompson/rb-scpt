@@ -233,7 +233,7 @@ class Codecs
     case val
     when AEMReference::Query then val.AEM_pack_self(self)
 
-    when Fixnum, Bignum then
+    when Integer then
       if SInt32Bounds === val
         AE::AEDesc.new(KAE::TypeSInt32, [val].pack('l'))
       elsif SInt64Bounds === val

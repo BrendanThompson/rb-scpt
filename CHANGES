@@ -1,3 +1,9 @@
+2017-10-26 -- 1.0.3
+
+- Fixed Fixnum, Bignum deprecation for ruby 2.4 (https://bugs.ruby-lang.org/issues/12739)
+
+---
+
 2015-07-14 -- 1.0.0
 
 - Forked project from SourceForce to GitHub
