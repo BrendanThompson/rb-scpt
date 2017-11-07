@@ -6,8 +6,21 @@ task :default => :build
 task :test => :build
 
 task :build do
-  ruby "extconf.rb"
   sh "make"
+end
+
+task :build => %w[Makefile ae.bundle]
+
+file "Makefile" do
+  ruby "extconf.rb"
+end
+
+deps = %w[SendThreadSafe rbae]
+
+file "ae.bundle" => deps.map { |dep| "#{dep}.o" }
+
+deps.each do |dep|
+  file "#{dep}.o" => "src/#{dep}.c"
 end
 
 Rake::TestTask.new do |t|
