@@ -118,7 +118,7 @@ class TC_AppscriptCommands < Minitest::Test
 
     assert_raises(Appscript::CommandError) { @te.documents[10000].get }
 
-    assert_instance_of(Fixnum, @te.documents.count)
+    assert_kind_of(Integer, @te.documents.count)
     assert_equal(@te.documents.count, @te.count(:each=>:document))
   end
 
