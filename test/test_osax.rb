@@ -1,9 +1,9 @@
 #!/usr/bin/ruby -w
 
-require 'test/unit'
+require 'minitest/autorun'
 require 'osax'
 
-class TC_OSAX < Test::Unit::TestCase
+class TC_OSAX < Minitest::Test
 
   def test_1
     sa = OSAX.osax('Standardadditions')

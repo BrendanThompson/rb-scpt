@@ -1,10 +1,10 @@
 #!/usr/bin/ruby -w
 
-require 'test/unit'
+require 'minitest/autorun'
 require "_aem/findapp"
 
 
-class TC_FindApp < Test::Unit::TestCase
+class TC_FindApp < Minitest::Test
 
   def test_find
     [

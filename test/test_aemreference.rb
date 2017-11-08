@@ -1,12 +1,12 @@
 #!/usr/bin/ruby -w
 
-require 'test/unit'
+require 'minitest/autorun'
 require "_aem/aemreference"
 require "_aem/typewrappers"
 require "_aem/codecs"
 
 
-class TC_AEMReferences < Test::Unit::TestCase
+class TC_AEMReferences < Minitest::Test
 
   def test_reference_forms
     [
@@ -93,21 +93,21 @@ class TC_AEMReferences < Test::Unit::TestCase
         val2 = DefaultCodecs.unpack(d)
         assert_equal(val, val2)
         val2 = DefaultCodecs.unpack(d)
-        assert_block { val.eql?(val2) }
+        assert_predicate val, :eql?, val2
         val2 = DefaultCodecs.unpack(d)
         assert_equal(val2, val)
         val2 = DefaultCodecs.unpack(d)
-        assert_block { val2.eql?(val) }
+        assert_predicate val2, :eql?, val
       rescue
         puts 'EXPECTED: ' + res
         raise
       end
     end
-    assert_not_equal(AEMReference::App.property('ctxt').property('ctxt'), AEMReference::Con.property('ctxt').property('ctxt'))
-    assert_not_equal(AEMReference::App.property('foob').property('ctxt'), AEMReference::App.property('ctxt').property('ctxt'))
-    assert_not_equal(AEMReference::App.elements('ctxt').property('ctxt'), AEMReference::App.property('ctxt').property('ctxt'))
-    assert_not_equal(AEMReference::App.elements('ctxt').property('ctxt'), 333)
-    assert_not_equal(333, AEMReference::App.property('ctxt').property('ctxt'))
+    refute_equal(AEMReference::App.property('ctxt').property('ctxt'), AEMReference::Con.property('ctxt').property('ctxt'))
+    refute_equal(AEMReference::App.property('foob').property('ctxt'), AEMReference::App.property('ctxt').property('ctxt'))
+    refute_equal(AEMReference::App.elements('ctxt').property('ctxt'), AEMReference::App.property('ctxt').property('ctxt'))
+    refute_equal(AEMReference::App.elements('ctxt').property('ctxt'), 333)
+    refute_equal(333, AEMReference::App.property('ctxt').property('ctxt'))
     #		# by-filter references do basic type checking to ensure an its-based reference is given
     assert_raises(TypeError) { AEMReference::App.elements('docu').by_filter(1) }
 

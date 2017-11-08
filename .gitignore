@@ -1,5 +1,10 @@
+*.o
 *.swp
 *.swo
 *.DS_STORE
 bin/
 *.gem
+/Makefile
+/ae.bundle
+/src/osx_intern.h
+/src/osx_ruby.h

@@ -647,7 +647,7 @@ module OSAX
     osax_name = osax_name.downcase
     m = /^(.+).osax$/.match(osax_name)
     osax_name = m[1] if m != nil
-    osax_path, terms = OSAXCache.fetch(osax_name) do
+    osax_path, _terms = OSAXCache.fetch(osax_name) do
       raise ArgumentError, "Scripting addition not found: #{original_name.inspect}"
     end
     sp = OSAX::SdefParser.new

@@ -226,18 +226,19 @@ end
 # hooks in Module that will hide any defined.
 
 class Module
-  madded = method(:method_added)
-  define_method(:method_added) do |name|
+  alias so_method_added method_added
+  def method_added name
     # puts "ADDED    %-32s %s" % [name, self]
-    result = madded.call(name)
+    result = so_method_added(name)
     if self == Object
       AS_SafeObject.hide(name)
     end
     return result
   end
-  mincluded = method(:included)
-  define_method(:included) do |mod|
-    result = mincluded.call(mod)
+
+  alias so_included included
+  def included mod
+    result = so_included(mod)
     # puts "INCLUDED %-32s %s" % [mod, self]
     if mod == Object
       public_instance_methods(true).each { |name| AS_SafeObject.hide(name) }
