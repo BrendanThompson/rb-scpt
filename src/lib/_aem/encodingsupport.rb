@@ -67,11 +67,8 @@ module AEMEncodingSupport
 
   end
 
-
   def AEMEncodingSupport.encoding_support
-    # get the appropriate module for the Ruby version used
-    version, sub_version = RUBY_VERSION.split('.').collect {|n| n.to_i} [0, 2]
-    return (version >= 1 and sub_version >= 9) ? AEMEncodingSupport::EnableStringEncodings : AEMEncodingSupport::DisableStringEncodings
+    RUBY_VERSION.to_f >= 1.9 ? EnableStringEncodings : DisableStringEncodings
   end
 
 end
