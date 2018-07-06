@@ -5,4 +5,4 @@ Ruby AppleScript (rb-scpt) is a high-level, user-friendly Apple event bridge tha
 
 ## Contributing
 
-All contributions to this repo are welcome, infact wanted. Please ensure that all work is done off of the `develop` branch with a PR back into master. New versions of the gem will be built from master.
+All contributions to this repo are welcome, in fact wanted. Please ensure that all work is done off of the `develop` branch with a PR back into master. New versions of the gem will be built from master.
