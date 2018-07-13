@@ -53,8 +53,6 @@ new_filename_prefix = 'osx_'
   $stderr.puts "create #{File.expand_path(dst_fname)} ..."
   File.open(dst_fname, 'w') do |dstfile|
     IO.foreach(src_path) do |line|
-      line = line.gsub(/\bID\b/, 'RB_ID')
-      line = line.gsub(/\bT_DATA\b/, 'RB_T_DATA')
       line = line.gsub(/\b(?:ruby\/)?intern.h\b/, "#{new_filename_prefix}intern.h")
       line = line.gsub('#include "defines.h"', '#include "ruby/defines.h"') if not is_ruby_18
       dstfile.puts line
