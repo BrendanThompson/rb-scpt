@@ -5,6 +5,7 @@ task :default => :test
 task :default => :build
 task :test => :build
 
+desc "build the project"
 task :build do
   sh "make"
 end
