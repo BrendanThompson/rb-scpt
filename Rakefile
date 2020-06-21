@@ -5,8 +5,14 @@ task :default => :test
 
 task :test => :compile
 
+desc "clean the project"
 task :clean do
   rm_f Dir["**/*~", "*.gem", "**/*.bundle"]
+end
+
+desc "build the project"
+task :build do
+  sh "make"
 end
 
 desc "build the gem"
