@@ -33,4 +33,4 @@ require 'mkmf'
 $CFLAGS << ' -Wall'
 $LDFLAGS << ' -framework Carbon -framework ApplicationServices'
 
-create_makefile "rb-scpt"
+create_makefile "AE"

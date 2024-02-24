@@ -2,8 +2,8 @@ require "rake/testtask"
 
 require "rake/extensiontask"
 
-Rake::ExtensionTask.new "rb-scpt" do |ext|
-  ext.lib_dir = "lib/rb-scpt"
+Rake::ExtensionTask.new "AE" do |ext|
+  ext.lib_dir = "lib/AE"
 end
 
 task :default => :test
