@@ -137,7 +137,7 @@ class TC_AppscriptCommands < Minitest::Test
     end
 
     assert_equal(-1728, e.to_i)
-    assert_equal("CommandError\n\t\tOSERROR: -1728\n\t\tMESSAGE: Can't get reference.\n\t\tOFFENDING OBJECT: app(\"/System/Library/CoreServices/Finder.app\").items[10000]\n\t\tCOMMAND: app(\"/System/Library/CoreServices/Finder.app\").items[10000].get()\n", e.to_s)
+    assert_equal("CommandError\n\t\tOSERROR: -1728\n\t\tMESSAGE: Can't get reference.\n\t\tOFFENDING OBJECT: 10000\n\t\tEXPECTED TYPE: :file_url\n\t\tCOMMAND: app(\"/System/Library/CoreServices/Finder.app\").items[10000].get()\n", e.to_s)
     assert_instance_of(AEM::EventError, e.real_error)
   end
 end
