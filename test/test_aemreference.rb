@@ -93,11 +93,11 @@ class TC_AEMReferences < Minitest::Test
         val2 = DefaultCodecs.unpack(d)
         assert_equal(val, val2)
         val2 = DefaultCodecs.unpack(d)
-        assert_predicate val, :eql?, val2
+        assert_operator val, :eql?, val2
         val2 = DefaultCodecs.unpack(d)
         assert_equal(val2, val)
         val2 = DefaultCodecs.unpack(d)
-        assert_predicate val2, :eql?, val
+        assert_operator val2, :eql?, val
       rescue
         puts 'EXPECTED: ' + res
         raise

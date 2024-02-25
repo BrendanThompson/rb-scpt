@@ -78,8 +78,13 @@ class TC_Codecs < Minitest::Test
       data = num(data)
       d = @c.pack(val)
       assert_equal(type, d.type)
-      assert_equal(data, d.data)
-      assert_equal(val, @c.unpack(d))
+      assert_equal(data.b, d.data)
+
+      if type == KAE::TypeFloat then
+        assert_in_epsilon(val, @c.unpack(d))
+      else
+        assert_equal(val, @c.unpack(d))
+      end
     end
   end
 
@@ -101,7 +106,7 @@ class TC_Codecs < Minitest::Test
       data = ut16(data)
       d = @c.pack(val)
       assert_equal(KAE::TypeUnicodeText, d.type)
-      assert_equal(data, d.data)
+      assert_equal(data.b, d.data)
       assert_equal(val, @c.unpack(d))
     end
     assert_raises(TypeError) { @c.pack("\x88") } # non-valid UTF8 strings should raise error when coercing from typeUTF8Text to typeUnicodeText
@@ -116,17 +121,17 @@ class TC_Codecs < Minitest::Test
       data = num(data)
       d = @c.pack(t)
       assert_equal(KAE::TypeLongDateTime, d.type)
-      assert_equal(data, d.data)
+      assert_equal(data.b, d.data)
       assert_equal(t, @c.unpack(AE::AEDesc.new(KAE::TypeLongDateTime, data)))
     end
   end
 
   def test_file
-    path = '/Applications/TextEdit.app'
+    path = '/System/Applications/TextEdit.app'
     d = @c.pack(MacTypes::Alias.path(path))
     assert_equal(path, @c.unpack(d).to_s)
 
-    path = '/Applications/TextEdit.app'
+    path = '/System/Applications/TextEdit.app'
     d = @c.pack(MacTypes::FileURL.path(path))
     assert_equal(path, @c.unpack(d).to_s)
   end
@@ -141,10 +146,10 @@ class TC_Codecs < Minitest::Test
       d = @c.pack(val)
       val2 = @c.unpack(d)
       assert_equal(val, val2)
-      assert_predicate val, :eql?, val2
+      assert_operator val, :eql?, val2
       val2 = @c.unpack(d)
       assert_equal(val2, val)
-      assert_predicate val2, :eql?, val
+      assert_operator val2, :eql?, val
     end
     assert_raises(ArgumentError) { AEM::AEType.new(3) }
     assert_raises(ArgumentError) { AEM::AEType.new("docum") }

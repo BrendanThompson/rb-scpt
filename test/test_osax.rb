@@ -6,7 +6,7 @@ require 'osax'
 class TC_OSAX < Minitest::Test
 
   def test_1
-    sa = OSAX.osax('Standardadditions')
+    sa = OSAX.osax('StandardAdditions')
 
     assert_equal(65, sa.ASCII_number('A'))
 
@@ -19,34 +19,33 @@ class TC_OSAX < Minitest::Test
   end
 
   def test_2
-    sa = OSAX.osax('Standardadditions').by_name('Finder')
+    sa = OSAX.osax('StandardAdditions').by_name('Finder')
     assert_equal(65, sa.ASCII_number('A'))
     assert_equal(MacTypes::Alias.path("/System/Library/CoreServices/Finder.app/"), sa.path_to(nil))
   end
 
   def test_3
-    sa = OSAX.osax('Standardadditions').by_creator('MACS')
+    sa = OSAX.osax('StandardAdditions').by_creator('MACS')
     assert_equal(65, sa.ASCII_number('A'))
     assert_equal(MacTypes::Alias.path("/System/Library/CoreServices/Finder.app/"), sa.path_to(nil))
   end
 
   def test_4
-    sa = OSAX.osax('Standardadditions').by_id('com.apple.finder')
+    sa = OSAX.osax('StandardAdditions').by_id('com.apple.Finder')
     assert_equal(65, sa.ASCII_number('A'))
     assert_equal(MacTypes::Alias.path("/System/Library/CoreServices/Finder.app/"), sa.path_to(nil))
   end
 
   def test_5
-    sa = OSAX.osax('Standardadditions').by_pid(`top -l1 | grep Finder | awk '{ print $1 }'`.to_i)
-    assert_equal(MacTypes::Alias.path("/System/Library/CoreServices/Finder.app/"), sa.path_to(nil))
+    pid = `top -l1 | grep Finder | awk '{ print $1 }'`.to_i
+    sa = OSAX.osax('StandardAdditions').by_pid(pid)
     assert_equal(65, sa.ASCII_number('A'))
+    assert_equal(MacTypes::Alias.path("/System/Library/CoreServices/Finder.app/"), sa.path_to(nil))
   end
 
   def test_6
-    sa = OSAX.osax('Standardadditions').by_aem_app(AEM::Application.by_path("/System/Library/CoreServices/Finder.app/"))
+    sa = OSAX.osax('StandardAdditions').by_aem_app(AEM::Application.by_path("/System/Library/CoreServices/Finder.app/"))
     assert_equal(65, sa.ASCII_number('A'))
     assert_equal(MacTypes::Alias.path("/System/Library/CoreServices/Finder.app/"), sa.path_to(nil))
   end
-
-
 end

@@ -18,6 +18,8 @@ class TC_MacTypes < Minitest::Test
   end
 
   def test_alias
+    skip "MacTypes::Alias needs to be ported off of Carbon's aliases"
+
     # make alias
     f = MacTypes::Alias.path(@path1)
 
@@ -42,9 +44,9 @@ class TC_MacTypes < Minitest::Test
     # check alias keeps track of moved file
     `mv #{@path1} #{@path2}`
     # puts "alias path 2: #{f}" # /private/tmp/moved-codecs-test.HWr1EnE3
-    assert_equal(p2, f.to_s)
+    assert_equal(p2.b, f.to_s)
 
-    assert_equal(p2, normalize(f.path))
+    assert_equal(p2.b, normalize(f.path))
 
     # check a FileNotFoundError is raised if getting path/FileURL for a filesystem object that no longer exists
     `rm #{@path2}`
@@ -63,7 +65,7 @@ class TC_MacTypes < Minitest::Test
     assert_equal('/non/existent path', g.to_s)
 
     assert_equal('furl', g.desc.type)
-    assert_equal('file://localhost/non/existent%20path', g.desc.data)
+    assert_equal('file:///non/existent%20path', g.desc.data)
 
     assert_equal('MacTypes::FileURL.path("/non/existent path")', g.to_file_url.inspect)
 

@@ -3,17 +3,11 @@
 require 'minitest/autorun'
 require 'rb-scpt'
 
-# rb-appscript 0.5.0+ should no longer require the following kludge:
-#class AS_SafeObject
-#	def self.hide(name)
-#	end
-#end
-
 class TC_AppscriptNewApp < Minitest::Test
 
   def test_by_name
     [
-     '/Applications/TextEdit.app',
+     '/System/Applications/TextEdit.app',
      'Finder.app',
      'System Events'
     ].each do |name|
@@ -22,8 +16,8 @@ class TC_AppscriptNewApp < Minitest::Test
       assert_instance_of(Appscript::Application, a)
       assert_instance_of(Appscript::Reference, a.name)
     end
-    assert_equal('app("/Applications/TextEdit.app")', Appscript.app('TextEdit').to_s)
-    assert_equal('app("/Applications/TextEdit.app")', Appscript.app.by_name('TextEdit').to_s)
+    assert_equal('app("/System/Applications/TextEdit.app")', Appscript.app('TextEdit').to_s)
+    assert_equal('app("/System/Applications/TextEdit.app")', Appscript.app.by_name('TextEdit').to_s)
 
     assert_raises(Appscript::ApplicationNotFoundError) { Appscript.app('/non-existent/app') }
     assert_raises(Appscript::ApplicationNotFoundError) { Appscript.app('non-existent.app') }
@@ -39,7 +33,7 @@ class TC_AppscriptNewApp < Minitest::Test
       assert_instance_of(Appscript::Application, a)
       assert_instance_of(Appscript::Reference, a.name)
     end
-    assert_equal('app("/Applications/TextEdit.app")', Appscript.app.by_id('com.apple.textedit').to_s)
+    assert_equal('app("/System/Applications/TextEdit.app")', Appscript.app.by_id('com.apple.textedit').to_s)
 
     assert_raises(Appscript::ApplicationNotFoundError) { Appscript.app.by_id('non.existent.app') }
   end
@@ -47,7 +41,7 @@ class TC_AppscriptNewApp < Minitest::Test
   def test_by_creator
     a = Appscript.app.by_creator('ttxt')
     assert_instance_of(Appscript::Reference, a.name)
-    assert_equal('app("/Applications/TextEdit.app")', a.to_s)
+    assert_equal('app("/System/Applications/TextEdit.app")', a.to_s)
     assert_raises(Appscript::ApplicationNotFoundError) { Appscript.app.by_id('!@$o') }
   end
 
@@ -60,9 +54,9 @@ class TC_AppscriptNewApp < Minitest::Test
   end
 
   def test_by_aem_app
-    a = Appscript.app.by_aem_app(AEM::Application.by_path('/Applications/TextEdit.app'))
+    a = Appscript.app.by_aem_app(AEM::Application.by_path('/System/Applications/TextEdit.app'))
     assert_instance_of(Appscript::Reference, a.name)
-    assert_equal('app.by_aem_app(AEM::Application.by_path("/Applications/TextEdit.app"))', a.to_s)
+    assert_equal('app.by_aem_app(AEM::Application.by_path("/System/Applications/TextEdit.app"))', a.to_s)
   end
 end
 
@@ -138,12 +132,12 @@ class TC_AppscriptCommands < Minitest::Test
   end
 
   def test_command_error
-    begin
+    e = assert_raises Appscript::CommandError do
       @f.items[10000].get
-    rescue Appscript::CommandError => e
-      assert_equal(-1728, e.to_i)
-      assert_equal("CommandError\n\t\tOSERROR: -1728\n\t\tMESSAGE: Can't get reference.\n\t\tOFFENDING OBJECT: app(\"/System/Library/CoreServices/Finder.app\").items[10000]\n\t\tCOMMAND: app(\"/System/Library/CoreServices/Finder.app\").items[10000].get()\n", e.to_s)
-      assert_instance_of(AEM::EventError, e.real_error)
     end
+
+    assert_equal(-1728, e.to_i)
+    assert_equal("CommandError\n\t\tOSERROR: -1728\n\t\tMESSAGE: Can't get reference.\n\t\tOFFENDING OBJECT: app(\"/System/Library/CoreServices/Finder.app\").items[10000]\n\t\tCOMMAND: app(\"/System/Library/CoreServices/Finder.app\").items[10000].get()\n", e.to_s)
+    assert_instance_of(AEM::EventError, e.real_error)
   end
 end
