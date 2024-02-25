@@ -222,7 +222,8 @@ rbAE_AEDesc_newUnflatten(VALUE class, VALUE data)
   AEDesc desc;
 
   Check_Type(data, T_STRING);
-  err = AEUnflattenDesc(RSTRING_PTR(data), &desc);
+
+  err = AEUnflattenDescFromBytes(RSTRING_PTR(data), RSTRING_LEN(data), &desc);
   if (err != noErr) rbAE_raiseMacOSError("Can't create AEDesc.", err);
   return rbAE_wrapAEDesc(&desc);
 }
