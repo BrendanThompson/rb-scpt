@@ -75,11 +75,9 @@ module Send
         end
       else # Decode application's reply, if any. May be a return value, error number (and optional message), or nothing.
         if reply_event.type != KAE::TypeNull
-          event_result = {}
-          reply_event.length.times do |i|
-            key, value = reply_event.get_item(i + 1, KAE::TypeWildCard)
-            event_result[key] = value
-          end
+          event_result = reply_event.length.times.to_h { |i|
+            reply_event.get_item(i.next, KAE::TypeWildCard)
+          }
           if event_result.has_key?(KAE::KeyErrorNumber) # The application raised an error.
             # Error info is unpacked using default codecs for reliability.
             e_num = DefaultCodecs.unpack(event_result[KAE::KeyErrorNumber])
