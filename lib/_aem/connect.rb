@@ -169,8 +169,8 @@ module Connect
 
   def Connect.local_app(path)
     # Make an AEAddressDesc identifying a local application. (Application will be launched if not already running.)
-    #	path : string -- full path to application, e.g. '/Applications/TextEdit.app'
-    #	Result : AEAddressDesc
+    #   path : string -- full path to application, e.g. '/Applications/TextEdit.app'
+    #   Result : AEAddressDesc
     #
     # Always creates AEAddressDesc by process serial number; that way there's no confusion if multiple versions of the same app are running.
     path = @@encoding_support.to_utf8_string(path)
@@ -189,16 +189,16 @@ module Connect
 
   def Connect.local_app_by_pid(pid)
     # Make an AEAddressDesc identifying a running application by Unix process id.
-    #	pid : integer -- unsigned 32-bit integer
-    #	Result : AEAddressDesc
+    #   pid : integer -- unsigned 32-bit integer
+    #   Result : AEAddressDesc
     return AE::AEDesc.new(KAE::TypeKernelProcessID, [pid].pack('L'))
   end
 
   def Connect.remote_app(url)
     url = @@encoding_support.to_utf8_string(url)
     # Make an AEAddressDesc identifying a running application on another machine.
-    #	url : string -- URL for remote application, e.g. 'eppc://user:password@0.0.0.1/TextEdit'
-    #	Result : AEAddressDesc
+    #   url : string -- URL for remote application, e.g. 'eppc://user:password@0.0.0.1/TextEdit'
+    #   Result : AEAddressDesc
     raise ArgumentError, "Invalid url: #{url}" if not url.include?(':') # workaround: process will crash if no colon in URL (OS bug)
     return AE::AEDesc.new(KAE::TypeApplicationURL, url)
   end

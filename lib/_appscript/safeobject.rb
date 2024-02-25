@@ -24,10 +24,10 @@
 # require 'appscript'
 #
 # module X
-#	def name
-#		puts 'X.name was called'
-#		return 999
-#	end
+#   def name
+#     puts 'X.name was called'
+#     return 999
+#   end
 # end
 # include X
 #

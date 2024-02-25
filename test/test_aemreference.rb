@@ -108,7 +108,7 @@ class TC_AEMReferences < Minitest::Test
     refute_equal(AEMReference::App.elements('ctxt').property('ctxt'), AEMReference::App.property('ctxt').property('ctxt'))
     refute_equal(AEMReference::App.elements('ctxt').property('ctxt'), 333)
     refute_equal(333, AEMReference::App.property('ctxt').property('ctxt'))
-    #		# by-filter references do basic type checking to ensure an its-based reference is given
+    # by-filter references do basic type checking to ensure an its-based reference is given
     assert_raises(TypeError) { AEMReference::App.elements('docu').by_filter(1) }
 
   end

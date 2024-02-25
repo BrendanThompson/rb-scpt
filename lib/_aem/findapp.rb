@@ -42,8 +42,8 @@ module FindApp
     # Absolute paths are also accepted. An '.app' suffix is optional.
     #
     # Examples:
-    #	FindApp.by_name('TextEdit')
-    #	FindApp.by_name('Finder.app')
+    #   FindApp.by_name('TextEdit')
+    #   FindApp.by_name('Finder.app')
     #
     if name[0, 1] != '/' # application name only, not its full path
       begin
@@ -69,7 +69,7 @@ module FindApp
     # Find the application with the given bundle id and return its full path.
     #
     # Examples:
-    #	FindApp.by_id('com.apple.textedit')
+    #   FindApp.by_id('com.apple.textedit')
     #
     return _find_app(nil, id, nil)
   end
@@ -78,7 +78,7 @@ module FindApp
     # Find the application with the given creator type and return its full path.
     #
     # Examples:
-    #	FindApp.by_creator('ttxt')
+    #   FindApp.by_creator('ttxt')
     #
     return _find_app(creator, nil, nil)
   end

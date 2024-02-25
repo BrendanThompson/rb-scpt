@@ -221,12 +221,12 @@ class ReferenceRenderer
   def ReferenceRenderer.render(app_data, aem_reference)
     # Take an aem reference, e.g.:
     #
-    #	app.elements('docu').by_index(1).property('ctxt')
+    #   app.elements('docu').by_index(1).property('ctxt')
     #
     # and an AppData instance containing application's location and terminology,
     # and render an appscript-style reference string, e.g.:
     #
-    #	"AS.app('/Applications/TextEdit.app').documents[1].text"
+    #   "AS.app('/Applications/TextEdit.app').documents[1].text"
     #
     # Used by AS::Reference#to_s
     #

@@ -189,9 +189,9 @@ module DefaultTerminology
           }
 
   Properties = {
-		'pcls' => :class_,
-		'pALL' => :properties_,
-		'ID  ' => :id_,
+                'pcls' => :class_,
+                'pALL' => :properties_,
+                'ID  ' => :id_,
                }
 
   Elements = {

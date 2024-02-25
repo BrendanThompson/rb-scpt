@@ -190,7 +190,8 @@ module AEMReference
     end
 
     def AEM_resolve(obj)
-      return @_container.AEM_resolve(obj).send(@_keyname)		end
+      return @_container.AEM_resolve(obj).send(@_keyname)
+    end
   end
 
 

@@ -61,11 +61,11 @@ module Send
       #
       # [1] Should be the sum of zero or more of the following kae module constants:
       #
-      #	KAENoReply | KAEQueueReply | KAEWaitReply
-      #	KAEDontReconnect
-      #	KAEWantReceipt
-      #	KAENeverInteract | KAECanInteract | KAEAlwaysInteract
-      #	KAECanSwitchLayer
+      # KAENoReply | KAEQueueReply | KAEWaitReply
+      # KAEDontReconnect
+      # KAEWantReceipt
+      # KAENeverInteract | KAECanInteract | KAEAlwaysInteract
+      # KAECanSwitchLayer
 
       begin
         reply_event = _send_apple_event(flags, timeout)
@@ -103,8 +103,8 @@ module Send
     # Represents an error raised by the Apple Event Manager or target application when a command fails.
     #
     # Methods:
-    #	number : integer -- MacOS error number
-    #	message : string -- application error message if any, or default error description if available
+    #   number : integer -- MacOS error number
+    #   message : string -- application error message if any, or default error description if available
 
     # Most applications don't provide error description strings, so define default descriptions for the common ones.
     # Following default error descriptions are cribbed from the AppleScript Language Guide/MacErrors.h:

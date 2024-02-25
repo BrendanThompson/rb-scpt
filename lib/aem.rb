@@ -210,11 +210,11 @@ module AEM
 
     def event(event, params={}, atts={}, return_id=KAE::KAutoGenerateReturnID, codecs=DefaultCodecs)
       # Construct an Apple event targetted at this application.
-      #	event  : string -- 8-letter code indicating event's class, e.g. 'coregetd'
-      #	params : hash -- a dict of form {AE_code:anything,...} containing zero or more event parameters (message arguments)
-      #	atts : hash -- a dict of form {AE_code:anything,...} containing zero or more event attributes (event info)
-      #	return_id : integer  -- reply event's ID
-      #	codecs : Codecs -- codecs object to use when packing/unpacking this event
+      # event  : string -- 8-letter code indicating event's class, e.g. 'coregetd'
+      # params : hash -- a dict of form {AE_code:anything,...} containing zero or more event parameters (message arguments)
+      # atts : hash -- a dict of form {AE_code:anything,...} containing zero or more event attributes (event info)
+      # return_id : integer  -- reply event's ID
+      # codecs : Codecs -- codecs object to use when packing/unpacking this event
       return self.class::Event.new(@address_desc, event, params, atts, @_transaction, return_id, codecs)
     end
 
