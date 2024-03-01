@@ -72,9 +72,9 @@ class UnitTypeCodecs
 
   def add_types(type_defs)
     # type_defs is a list of lists, where each sublist is of form:
-    #	[typename, typecode, packproc, unpackproc]
+    #   [typename, typecode, packproc, unpackproc]
     # or:
-    #	[typename, typecode]
+    #   [typename, typecode]
     # If optional packproc and unpackproc are omitted, default pack/unpack procs
     # are used instead; these pack/unpack AEDesc data as a double precision float.
     type_defs.each do |name, code, packer, unpacker|
@@ -191,7 +191,7 @@ class Codecs
     # them into AEDescs of typeUTF8Text. To force the old-style behaviour where
     # strings are treated as byte strings containing UTF-8 data, call:
     #
-    #	some_application.AS_app_data.use_ascii_8bit_strings
+    #   some_application.AS_app_data.use_ascii_8bit_strings
     #
     # This will cause Strings to use the binary ASCII-8BIT encoding; as in Ruby 1.8,
     # the user is responsible for ensuring that strings contain UTF-8 data.
@@ -294,7 +294,7 @@ class Codecs
     # (assuming target app knows how to handle new UInt64 type):
     #
     # def pack_uint64(val)
-    # 	AE::AEDesc.new(KAE::TypeUInt64, [val.to_f].pack('Q'))
+    #   AE::AEDesc.new(KAE::TypeUInt64, [val.to_f].pack('Q'))
     # end
     AE::AEDesc.new(KAE::TypeFloat, [val.to_f].pack('d')) # pack as 64-bit float for compatibility (lossy conversion)
   end

@@ -1,31 +1,19 @@
-require "rake/testtask"
+require "rake/extensiontask"
+Rake::ExtensionTask.new "AE" do |ext|
+  ext.lib_dir = "lib/AE"
+end
 
 task :default => :test
 
-task :default => :build
-task :test => :build
+task :test => :compile
 
-task :build do
-  sh "make"
+task :clean do
+  rm_f Dir["**/*~", "*.gem"]
 end
 
-task :build => %w[Makefile ae.bundle]
-
-file "Makefile" do
-  ruby "extconf.rb"
+task :gem => [:clean, :clobber] do
+  system "gem build"
 end
 
-deps = %w[SendThreadSafe rbae]
-
-file "ae.bundle" => deps.map { |dep| "#{dep}.o" }
-
-deps.each do |dep|
-  file "#{dep}.o" => "src/#{dep}.c"
-end
-
-Rake::TestTask.new do |t|
-  t.libs << "src/lib" << "."
-  t.test_files = FileList['test/test_*.rb']
-  t.verbose = true
-  t.loader = :direct
-end
+require "minitest/test_task"
+Minitest::TestTask.create

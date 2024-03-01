@@ -447,15 +447,15 @@ module Terminology
     #
     # Call the #dump method to dump faulty aetes to Ruby module, e.g.:
     #
-    # 	Terminology.dump('MyApp', 'MyAppGlue', '/path/to/ruby/modules/myappglue.rb')
+    #   Terminology.dump('MyApp', 'MyAppGlue', '/path/to/ruby/modules/myappglue.rb')
     #
     # Patch any errors by hand, then import the patched module into your script
     # and pass it to appscript's app() constructor via its 'terms' argument, e.g.:
     #
-    # 	require 'appscript'; include Appscript
-    # 	require 'myappglue'
+    #   require 'appscript'; include Appscript
+    #   require 'myappglue'
     #
-    # 	myapp = app('MyApp', terms => MyAppGlue)
+    #   myapp = app('MyApp', terms => MyAppGlue)
     #
     # Note that dumped terminologies aren't used by appscript's built-in help system.
     #

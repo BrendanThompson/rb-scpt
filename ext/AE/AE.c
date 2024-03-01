@@ -9,7 +9,7 @@
  *  - Jordan Breeding (64-bit support patch)
  */
 
-#include "osx_ruby.h"
+#include "ruby/ruby.h"
 #include <Carbon/Carbon.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include "SendThreadSafe.h"
@@ -222,7 +222,8 @@ rbAE_AEDesc_newUnflatten(VALUE class, VALUE data)
   AEDesc desc;
 
   Check_Type(data, T_STRING);
-  err = AEUnflattenDesc(RSTRING_PTR(data), &desc);
+
+  err = AEUnflattenDescFromBytes(RSTRING_PTR(data), RSTRING_LEN(data), &desc);
   if (err != noErr) rbAE_raiseMacOSError("Can't create AEDesc.", err);
   return rbAE_wrapAEDesc(&desc);
 }
@@ -746,8 +747,9 @@ rbAE_GenericEventHandler(const AppleEvent *request, AppleEvent *reply, SRefCon r
 /*******/
 
 static VALUE
-rbAE_AEInstallEventHandler(VALUE self, VALUE eventClass, VALUE eventID, SRefCon handler)
+rbAE_AEInstallEventHandler(VALUE self, VALUE eventClass, VALUE eventID, VALUE _handler)
 {
+  SRefCon handler = (SRefCon)_handler;
   /*
    * eventClass and eventID must be four-character code strings
    *
@@ -821,8 +823,9 @@ rbAE_GenericCoercionHandler(const AEDesc *fromDesc, DescType toType, SRefCon ref
 /*******/
 
 static VALUE
-rbAE_AEInstallCoercionHandler(VALUE self, VALUE fromType, VALUE toType, SRefCon handler)
+rbAE_AEInstallCoercionHandler(VALUE self, VALUE fromType, VALUE toType, VALUE _handler)
 {
+  SRefCon handler = (SRefCon)_handler;
   /*
    * fromType and toType must be four-character code strings
    *
@@ -895,7 +898,7 @@ rbAE_transformProcessToForegroundApplication(VALUE self)
 // Initialisation
 
 void
-Init_ae (void)
+Init_AE (void)
 {
 
   mAE = rb_define_module("AE");
