@@ -11,11 +11,7 @@ task :clean do
   rm_f Dir["**/*~", "*.gem"]
 end
 
-desc "build the project"
-task :build do
-  sh "make"
-end
-
+desc "build the gem"
 task :gem => [:clean, :clobber] do
   system "gem build"
 end

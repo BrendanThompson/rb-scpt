@@ -1,6 +1,6 @@
 require "rubygems"
 
-require "./src/lib/version.rb"
+require "./lib/version.rb"
 
 Gem::Specification.new do |s|
   s.name       = "rb-scpt"
