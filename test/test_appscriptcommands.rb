@@ -69,6 +69,8 @@ class TC_AppscriptCommands < Minitest::Test
   end
 
   def test_commands_1
+    skip "Not on CI" if ENV["CI"]
+
     assert_equal('TextEdit', @te.name.get)
     d = @te.make(:new=>:document, :with_properties=>{:text=>'test test_commands'})
     assert_instance_of(Appscript::Reference, d)
@@ -99,6 +101,8 @@ class TC_AppscriptCommands < Minitest::Test
   end
 
   def test_commands_2
+    skip "Not on CI" if ENV["CI"]
+
     d = @te.make(:new=>:document, :at=>@te.documents.end)
 
     @te.set(d.text, :to=> 'test1')
