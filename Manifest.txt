@@ -46,10 +46,10 @@ doc/osax-manual/03_examples.html
 doc/osax-manual/04_notes.html
 doc/osax-manual/index.html
 doc/rb-appscript-logo.png
-ext/AE/AE.c
-ext/AE/SendThreadSafe.c
-ext/AE/SendThreadSafe.h
-ext/AE/extconf.rb
+ext/ae/ae.c
+ext/ae/SendThreadSafe.c
+ext/ae/SendThreadSafe.h
+ext/ae/extconf.rb
 lib/_aem/aemreference.rb
 lib/_aem/codecs.rb
 lib/_aem/connect.rb
@@ -63,7 +63,6 @@ lib/_appscript/referencerenderer.rb
 lib/_appscript/reservedkeywords.rb
 lib/_appscript/safeobject.rb
 lib/_appscript/terminology.rb
-lib/ae.rb
 lib/aem.rb
 lib/kae.rb
 lib/osax.rb

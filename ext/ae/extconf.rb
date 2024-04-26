@@ -33,4 +33,4 @@ require 'mkmf'
 $CFLAGS << ' -Wall'
 $LDFLAGS << ' -framework Carbon -framework ApplicationServices'
 
-create_makefile "AE"
+create_makefile "ae"

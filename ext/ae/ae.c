@@ -898,7 +898,7 @@ rbAE_transformProcessToForegroundApplication(VALUE self)
 // Initialisation
 
 void
-Init_AE (void)
+Init_ae (void)
 {
 
   mAE = rb_define_module("AE");

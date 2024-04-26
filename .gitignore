@@ -1,5 +1,6 @@
-/lib/AE/*.bundle
+/lib/*.bundle
 *.swp
 *.swo
 *.DS_STORE
 /tmp/
+/rb-scpt-*.gem

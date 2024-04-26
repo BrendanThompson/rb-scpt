@@ -1,14 +1,12 @@
 require "rake/extensiontask"
-Rake::ExtensionTask.new "AE" do |ext|
-  ext.lib_dir = "lib/AE"
-end
+Rake::ExtensionTask.new "ae"
 
 task :default => :test
 
 task :test => :compile
 
 task :clean do
-  rm_f Dir["**/*~", "*.gem"]
+  rm_f Dir["**/*~", "*.gem", "**/*.bundle"]
 end
 
 desc "build the gem"
