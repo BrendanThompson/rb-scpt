@@ -906,6 +906,7 @@ Init_ae (void)
   // AE::AEDesc
 
   cAEDesc = rb_define_class_under(mAE, "AEDesc", rb_cObject);
+  rb_undef_alloc_func(cAEDesc);
 
   rb_define_singleton_method(cAEDesc, "new", rbAE_AEDesc_new, 2);
   rb_define_singleton_method(cAEDesc, "new_list", rbAE_AEDesc_newList, 1);
